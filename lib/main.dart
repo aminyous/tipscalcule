@@ -31,25 +31,40 @@ class TipsCalcul extends StatefulWidget {
 class _TipsCalculState extends State<TipsCalcul> {
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    // Add style
+    final style = theme.textTheme.titleMedium!.copyWith(
+      color: theme.colorScheme.onPrimary,
+      fontWeight: FontWeight.bold
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tips calcul"),
-        leading: const Text("hello"),
-      ),
+      appBar: AppBar(title: const Text("Tips calcul")),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-              padding: EdgeInsets.all(16),
+              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.deepPurple,
+                //color: Colors.deepPurple,
+                color: theme.colorScheme.inversePrimary,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Column(
+              child:  Column(
                 children: [
-                   Text("Total per Person"),
-                   Text("\$20"),
+                  Text("Total per Person",
+                  style: style,
+                  ),
+                  Text("\$20.89",
+                  style: style.copyWith(
+                    color: theme.colorScheme.onPrimary,
+                    fontSize: theme.textTheme.displaySmall?.fontSize
+                  ),
+                  ),
                 ],
-              )),
+              )
+              ),
         ],
       ),
     );
