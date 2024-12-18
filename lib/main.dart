@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tipscalcul/widgets/person_counter.dart';
+import 'package:tipscalcul/widgets/tip_slider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,7 +31,10 @@ class TipsCalcul extends StatefulWidget {
 }
 
 class _TipsCalculState extends State<TipsCalcul> {
+
   int _personCount = 0;
+  
+  double _tipPercentage = 0;
 
   void increment() {
     setState(() {
@@ -100,7 +104,20 @@ class _TipsCalculState extends State<TipsCalcul> {
                       print("value $value");
                     },
                   ),
-                  PersonCounter(theme: theme, personCount: _personCount, onDecrement: decrement, onIncrement: increment,)
+                  PersonCounter(theme: theme, personCount: _personCount, onDecrement: decrement, onIncrement: increment,),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Tip", style: theme.textTheme.titleMedium,),
+                      Text("\$20", style: theme.textTheme.titleMedium,),
+                    ],
+                  ),
+                   Text("${(_tipPercentage * 100).round()}%"),
+                  TipSlider(tipPercentage: _tipPercentage, onChanged: (double value) { 
+                    setState(() {
+                      _tipPercentage = value;
+                    });
+                   },),
                 ],
               ),
             ),
@@ -110,5 +127,7 @@ class _TipsCalculState extends State<TipsCalcul> {
     );
   }
 }
+
+
 
 
